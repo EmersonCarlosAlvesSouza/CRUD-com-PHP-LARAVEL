@@ -1,12 +1,18 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\TaskController; // ← Adiciona essa linha
+use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
-    return view('welcome');
+    if (Auth::check()) {
+        return redirect()->route('tasks.index');
+    }
+
+    return view('home');
 });
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -19,7 +25,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // Rotas de Tarefas
-    Route::resource('tasks', TaskController::class); // ← Adiciona isso dentro do grupo auth
+    Route::resource('tasks', TaskController::class);
 });
 
 require __DIR__.'/auth.php';

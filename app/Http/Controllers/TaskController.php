@@ -33,14 +33,14 @@ class TaskController extends Controller
     $request->validate([
         'title' => 'required|max:255',
         'description' => 'nullable',
-        'status' => 'required|in:Pendente,Concluída', // <-- Adicionado
+        'status' => 'required|in:Pendente,Concluída',
     ]);
 
     Task::create([
         'user_id' => auth()->id(),
         'title' => $request->title,
         'description' => $request->description,
-        'status' => $request->status, // <-- Adicionado
+        'status' => $request->status,
     ]);
 
     return redirect()->route('tasks.index')->with('success', 'Tarefa criada com sucesso!');
