@@ -8,7 +8,7 @@ Este projeto é uma aplicação de gestão de tarefas (To-Do List) desenvolvida 
 - Laravel 12
 - Bootstrap 5.3
 - Blade Templates
-- SQLite (padrão) ou MySQL
+- SQLite (padrão)
 - Laravel Breeze (Autenticação)
 
 ## ✅ Funcionalidades
