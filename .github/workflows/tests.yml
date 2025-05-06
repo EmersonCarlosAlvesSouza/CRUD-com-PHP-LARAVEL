@@ -40,6 +40,19 @@ jobs:
       - name: Copy environment file
         run: cp .env.example .env
 
+      - name: Ensure SQLite database exists
+        run: |
+          mkdir -p database
+          touch database/database.sqlite
+
+      - name: Set write permissions for SQLite
+        run: chmod -R 777 database
+
+      - name: Override .env settings for testing
+        run: |
+          echo "DB_CONNECTION=sqlite" >> .env
+          echo "DB_DATABASE=./database/database.sqlite" >> .env
+
       - name: Generate app key
         run: php artisan key:generate
 
